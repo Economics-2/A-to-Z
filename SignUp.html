@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up | A-to-Z eBook Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    /* Same styles as login.html for consistency */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f7f8fa;
+      margin: 0;
+      padding: 0;
+    }
+    .signup-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .signup-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 24px rgba(17,80,163,0.09), 0 1.5px 8px rgba(0,0,0,0.07);
+      width: 100%;
+      max-width: 375px;
+      padding: 2.5rem 2.2rem 2rem 2.2rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .signup-logo {
+      font-size: 2.1rem;
+      color: #1150a3;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 1.7rem;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+    }
+    .signup-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1.1rem;
+      color: #222;
+      text-align: center;
+    }
+    .signup-form label {
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: #555;
+      display: block;
+      font-size: 1rem;
+    }
+    .signup-form input {
+      width: 100%;
+      padding: 0.55rem 1rem;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 7px;
+      margin-bottom: 1.1rem;
+      transition: border 0.18s;
+    }
+    .signup-form input:focus {
+      border: 1.5px solid #1150a3;
+      outline: none;
+    }
+    .signup-form .password-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .signup-form .password-wrapper input {
+      margin-bottom: 0;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 1.1rem;
+      cursor: pointer;
+      outline: none;
+    }
+    .signup-btn {
+      background: #1150a3;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 0.68rem 1rem;
+      font-size: 1.07rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.4rem;
+      margin-bottom: 1rem;
+      transition: background 0.18s;
+    }
+    .signup-btn:hover {
+      background: #0a3671;
+    }
+    .signup-bottom {
+      text-align: center;
+      margin-top: 1.2rem;
+      color: #666;
+      font-size: 1rem;
+    }
+    .error-message {
+      color: #d32f2f;
+      background: #ffeaea;
+      border-radius: 6px;
+      padding: 0.6em 0.9em;
+      font-size: 0.99rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    .success-message {
+      color: #388e3c;
+      background: #e6f4ea;
+      border-radius: 6px;
+      padding: 0.6em 0.9em;
+      font-size: 0.99rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    @media (max-width: 480px) {
+      .signup-card { padding: 1.4rem 0.7rem; }
+      .signup-logo { font-size: 1.6rem;}
+    }
+  </style>
+</head>
+<body>
+<div class="signup-wrapper">
+  <form class="signup-card" id="signup-form">
+    <a class="signup-logo" href="index.html">A-to-Z</a>
+    <div class="signup-title">Create your account</div>
+    <div class="error-message" id="error-message"></div>
+    <div class="success-message" id="success-message"></div>
+    <div class="signup-form">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="username">
+      <label for="password">Password</label>
+      <div class="password-wrapper">
+        <input type="password" id="password" name="password" placeholder="Create password" required autocomplete="new-password">
+        <button class="toggle-password" type="button" tabindex="-1"><i class="fa fa-eye"></i></button>
+      </div>
+      <label for="confirm-password">Confirm Password</label>
+      <div class="password-wrapper">
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" required autocomplete="new-password">
+        <button class="toggle-password" type="button" tabindex="-1"><i class="fa fa-eye"></i></button>
+      </div>
+      <button type="submit" class="signup-btn">Sign Up</button>
+    </div>
+    <div class="signup-bottom">
+      Already have an account?
+      <a href="login.html">Sign in</a>
+    </div>
+  </form>
+</div>
+
+<!-- Firebase SDKs + Auth & Providers -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+  // Firebase configuration (same as your login.html)
+  const firebaseConfig = {
+    apiKey: "AIzaSyCVyXmjKI9pL37LJXkVcWMPtZSaXZG802c",
+    authDomain: "loginpage-6cb4a.firebaseapp.com",
+    projectId: "loginpage-6cb4a",
+    storageBucket: "loginpage-6cb4a.firebasestorage.app",
+    messagingSenderId: "475440251033",
+    appId: "1:475440251033:web:bd92422f82f2ebb196b808",
+    measurementId: "G-HFJV4BC66F"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth();
+
+  // Utility functions
+  function showError(msg) {
+    const err = document.getElementById('error-message');
+    err.style.display = 'block';
+    err.textContent = msg;
+  }
+  function hideError() {
+    const err = document.getElementById('error-message');
+    err.style.display = 'none';
+    err.textContent = '';
+  }
+  function showSuccess(msg) {
+    const succ = document.getElementById('success-message');
+    succ.style.display = 'block';
+    succ.textContent = msg;
+  }
+  function hideSuccess() {
+    const succ = document.getElementById('success-message');
+    succ.style.display = 'none';
+    succ.textContent = '';
+  }
+
+  // Password show/hide for both password inputs
+  document.querySelectorAll('.toggle-password').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const passInput = this.parentElement.querySelector('input');
+      const icon = this.querySelector('i');
+      if (passInput.type === 'password') {
+        passInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        passInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    });
+  });
+
+  // Signup form handler
+  document.getElementById('signup-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    hideError();
+    hideSuccess();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const confirmPassword = document.getElementById('confirm-password').value.trim();
+
+    if (password.length < 6) {
+      showError("Password should be at least 6 characters.");
+      return;
+    }
+    if (password !== confirmPassword) {
+      showError("Passwords do not match.");
+      return;
+    }
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      showSuccess("Account created! Redirecting to login...");
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 1500);
+    } catch (error) {
+      let msg = "Signup failed. Please try again.";
+      if (error.code === 'auth/email-already-in-use') msg = "Email is already registered.";
+      else if (error.code === 'auth/invalid-email') msg = "Invalid email address.";
+      else if (error.code === 'auth/operation-not-allowed') msg = "Signup is disabled for this project.";
+      showError(msg);
+    }
+  });
+</script>
+</body>
+</html>
