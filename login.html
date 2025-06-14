@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | A-to-Z eBook Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f7f8fa;
+      margin: 0;
+      padding: 0;
+    }
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .login-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 24px rgba(17,80,163,0.09), 0 1.5px 8px rgba(0,0,0,0.07);
+      width: 100%;
+      max-width: 375px;
+      padding: 2.5rem 2.2rem 2rem 2.2rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .login-logo {
+      font-size: 2.1rem;
+      color: #1150a3;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 1.7rem;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+    }
+    .login-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1.1rem;
+      color: #222;
+      text-align: center;
+    }
+    .login-form label {
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: #555;
+      display: block;
+      font-size: 1rem;
+    }
+    .login-form input {
+      width: 100%;
+      padding: 0.55rem 1rem;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 7px;
+      margin-bottom: 1.1rem;
+      transition: border 0.18s;
+    }
+    .login-form input:focus {
+      border: 1.5px solid #1150a3;
+      outline: none;
+    }
+    .login-form .password-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .login-form .password-wrapper input {
+      margin-bottom: 0;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 1.1rem;
+      cursor: pointer;
+      outline: none;
+    }
+    .login-btn {
+      background: #1150a3;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 0.68rem 1rem;
+      font-size: 1.07rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.4rem;
+      margin-bottom: 1rem;
+      transition: background 0.18s;
+    }
+    .login-btn:hover {
+      background: #0a3671;
+    }
+    .login-divider {
+      display: flex;
+      align-items: center;
+      margin: 1.1rem 0;
+    }
+    .login-divider span {
+      flex: 1;
+      height: 1px;
+      background: #e3e7ed;
+      margin: 0 0.8rem;
+    }
+    .social-login {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.1rem;
+    }
+    .social-btn {
+      border: none;
+      border-radius: 50%;
+      width: 2.6rem;
+      height: 2.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f1f1f1;
+      color: #444;
+      font-size: 1.15rem;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+    }
+    .social-btn:hover {
+      background: #1150a3;
+      color: #fff;
+    }
+    .login-links {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.98rem;
+      color: #222;
+      margin-bottom: 0.4rem;
+    }
+    .login-links a {
+      color: #1150a3;
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+    .login-links a:hover {
+      color: #d32f2f;
+    }
+    .login-bottom {
+      text-align: center;
+      margin-top: 1.2rem;
+      color: #666;
+      font-size: 1rem;
+    }
+    .error-message {
+      color: #d32f2f;
+      background: #ffeaea;
+      border-radius: 6px;
+      padding: 0.6em 0.9em;
+      font-size: 0.99rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    .success-message {
+      color: #388e3c;
+      background: #e6f4ea;
+      border-radius: 6px;
+      padding: 0.6em 0.9em;
+      font-size: 0.99rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    @media (max-width: 480px) {
+      .login-card { padding: 1.4rem 0.7rem; }
+      .login-logo { font-size: 1.6rem;}
+    }
+  </style>
+</head>
+<body>
+<div class="login-wrapper">
+  <form class="login-card" id="login-form">
+    <a class="login-logo" href="index.html">A-to-Z</a>
+    <div class="login-title">Sign in to your account</div>
+    <div class="error-message" id="error-message"></div>
+    <div class="success-message" id="success-message"></div>
+    <div class="login-form">
+      <label for="email">Email or Phone</label>
+      <input type="text" id="email" name="email" placeholder="Enter email or phone" required autocomplete="username">
+      <label for="password">Password</label>
+      <div class="password-wrapper">
+        <input type="password" id="password" name="password" placeholder="Enter password" required autocomplete="current-password">
+        <button class="toggle-password" type="button" tabindex="-1"><i class="fa fa-eye"></i></button>
+      </div>
+      <div class="login-links">
+        <a href="#">Forgot password?</a>
+      </div>
+      <button type="submit" class="login-btn">Login</button>
+    </div>
+    <div class="login-divider"><span></span>or<span></span></div>
+    <div class="social-login">
+      <button type="button" class="social-btn" id="google-login" title="Sign in with Google"><i class="fab fa-google"></i></button>
+      <button type="button" class="social-btn" id="facebook-login" title="Sign in with Facebook"><i class="fab fa-facebook-f"></i></button>
+      <!-- You can add more social providers if needed -->
+    </div>
+    <div class="login-bottom">
+      Don't have an account?
+      <a href="#">Create Account</a>
+    </div>
+  </form>
+</div>
+
+<!-- Firebase SDKs + Auth & Providers -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
+  import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+  // Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCVyXmjKI9pL37LJXkVcWMPtZSaXZG802c",
+    authDomain: "loginpage-6cb4a.firebaseapp.com",
+    projectId: "loginpage-6cb4a",
+    storageBucket: "loginpage-6cb4a.firebasestorage.app",
+    messagingSenderId: "475440251033",
+    appId: "1:475440251033:web:bd92422f82f2ebb196b808",
+    measurementId: "G-HFJV4BC66F"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth();
+
+  // Utility functions
+  function showError(msg) {
+    const err = document.getElementById('error-message');
+    err.style.display = 'block';
+    err.textContent = msg;
+  }
+  function hideError() {
+    const err = document.getElementById('error-message');
+    err.style.display = 'none';
+    err.textContent = '';
+  }
+  function showSuccess(msg) {
+    const succ = document.getElementById('success-message');
+    succ.style.display = 'block';
+    succ.textContent = msg;
+  }
+  function hideSuccess() {
+    const succ = document.getElementById('success-message');
+    succ.style.display = 'none';
+    succ.textContent = '';
+  }
+
+  // Password show/hide
+  document.querySelector('.toggle-password').addEventListener('click', function() {
+    const passInput = document.getElementById('password');
+    const icon = this.querySelector('i');
+    if (passInput.type === 'password') {
+      passInput.type = 'text';
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+    } else {
+      passInput.type = 'password';
+      icon.classList.remove('fa-eye-slash');
+      icon.classList.add('fa-eye');
+    }
+  });
+
+  // Login form handler
+  document.getElementById('login-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    hideError();
+    hideSuccess();
+    const emailOrPhone = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    // Basic email/phone validation (Rokomari style allows both)
+    let email;
+    if (/^\d{10,15}$/.test(emailOrPhone)) {
+      // If phone, append domain (for demo, use phone@a-to-z.com)
+      email = `${emailOrPhone}@a-to-z.com`;
+    } else {
+      email = emailOrPhone;
+    }
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      showSuccess("Login successful! Redirecting...");
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1300);
+    } catch (error) {
+      let msg = "Login failed. Please check your credentials.";
+      if (error.code === 'auth/user-not-found') msg = "No account found for this email/phone.";
+      else if (error.code === 'auth/wrong-password') msg = "Incorrect password. Try again.";
+      else if (error.code === 'auth/too-many-requests') msg = "Too many attempts. Please try again later.";
+      showError(msg);
+    }
+  });
+
+  // Google sign-in
+  document.getElementById('google-login').addEventListener('click', async function() {
+    hideError(); hideSuccess();
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      showSuccess("Login successful! Redirecting...");
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1200);
+    } catch (error) {
+      showError("Google sign-in failed. " + (error?.message || ""));
+    }
+  });
+
+  // Facebook sign-in
+  document.getElementById('facebook-login').addEventListener('click', async function() {
+    hideError(); hideSuccess();
+    const provider = new FacebookAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      showSuccess("Login successful! Redirecting...");
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1200);
+    } catch (error) {
+      showError("Facebook sign-in failed. " + (error?.message || ""));
+    }
+  });
+
+</script>
+</body>
+</html>
