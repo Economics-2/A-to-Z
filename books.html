@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Books | A-to-Z eBook Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background: #f8f9fa;
+      color: #222;
+    }
+    .navbar {
+      background: #fff;
+      padding: 0.7em 2em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar .logo {
+      color: #1150a3;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+    .navbar .nav-links {
+      display: flex;
+      gap: 1.5em;
+    }
+    .navbar a {
+      color: #222;
+      text-decoration: none;
+      font-size: 1.07rem;
+      transition: color 0.18s;
+    }
+    .navbar a.active, .navbar a:hover {
+      color: #1150a3;
+      font-weight: 700;
+    }
+    .navbar .search-bar {
+      display: flex;
+      align-items: center;
+      background: #f1f3f6;
+      border-radius: 6px;
+      padding: 0.35em 0.85em;
+      margin-left: 2em;
+    }
+    .navbar .search-bar input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 1em;
+      width: 200px;
+      margin-right: 0.5em;
+    }
+    .navbar .search-bar i {
+      color: #aaa;
+      font-size: 1.1em;
+    }
+    .banner {
+      background: linear-gradient(90deg, #1150a3 70%, #fff 100%);
+      color: #fff;
+      padding: 2.5em 0 2.5em 0;
+      text-align: center;
+      margin-bottom: 2em;
+      box-shadow: 0 2px 18px rgba(17,80,163,0.13);
+    }
+    .banner h1 {
+      font-size: 2.2em;
+      font-weight: 700;
+      margin: 0 0 0.5em 0;
+      letter-spacing: 1px;
+    }
+    .banner p {
+      font-size: 1.22em;
+      margin-bottom: 1.2em;
+      color: #f0f5fc;
+    }
+    .banner .quick-filters {
+      margin-top: 1.5em;
+      display: flex;
+      gap: 1em;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .banner .quick-filters button {
+      background: #fff;
+      color: #1150a3;
+      border: none;
+      border-radius: 21px;
+      padding: 0.5em 1.3em;
+      font-size: 1em;
+      font-weight: 600;
+      margin-bottom: 0.5em;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .banner .quick-filters button:hover {
+      background: #e7ecfa;
+      color: #0a3671;
+    }
+    .main {
+      max-width: 1300px;
+      margin: 0 auto 2.5em auto;
+      display: flex;
+      gap: 2em;
+    }
+    .sidebar {
+      flex: 0 0 250px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1.5px 5px rgba(0,0,0,0.04);
+      padding: 1.2em 1em 1.8em 1em;
+      min-height: 400px;
+    }
+    .sidebar h3 {
+      font-size: 1.1em;
+      color: #1150a3;
+      margin: 0 0 0.7em 0;
+      font-weight: 700;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .sidebar li {
+      margin-bottom: 0.55em;
+    }
+    .sidebar li a {
+      color: #555;
+      text-decoration: none;
+      font-size: 1em;
+      transition: color 0.15s;
+    }
+    .sidebar li a:hover {
+      color: #1150a3;
+    }
+    .filter-block {
+      margin-bottom: 2em;
+    }
+    .filter-block input[type="checkbox"] {
+      accent-color: #1150a3;
+    }
+    .products-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5em;
+    }
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8em;
+      flex-wrap: wrap;
+    }
+    .products-header h2 {
+      font-size: 1.5em;
+      font-weight: 700;
+      margin: 0;
+      color: #222;
+    }
+    .products-header .sort-select {
+      font-size: 1em;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 0.35em 0.85em;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+      gap: 1.3em;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1.5px 6px rgba(0,0,0,0.06);
+      padding: 1.1em 1em 1em 1em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.18s;
+      position: relative;
+      min-height: 410px;
+    }
+    .product-card:hover {
+      box-shadow: 0 4px 16px rgba(17,80,163,0.12);
+    }
+    .product-image {
+      width: 110px;
+      height: 160px;
+      object-fit: cover;
+      margin-bottom: 0.7em;
+      border-radius: 7px;
+      background: #f9fafb;
+      border: 1px solid #eee;
+      transition: transform 0.14s;
+    }
+    .product-card:hover .product-image {
+      transform: scale(1.04) rotate(-2deg);
+    }
+    .product-title {
+      font-size: 1.07em;
+      font-weight: 700;
+      color: #222;
+      margin: 0.3em 0 0.18em 0;
+      text-align: center;
+      min-height: 2.3em;
+      line-height: 1.2;
+    }
+    .product-author {
+      font-size: 0.97em;
+      color: #666;
+      margin-bottom: 0.35em;
+    }
+    .product-publisher {
+      font-size: 0.95em;
+      color: #888;
+      margin-bottom: 0.3em;
+    }
+    .product-price {
+      color: #d32f2f;
+      font-weight: 700;
+      font-size: 1.12em;
+      margin-bottom: 0.25em;
+    }
+    .product-old-price {
+      color: #888;
+      text-decoration: line-through;
+      font-size: 0.98em;
+      margin-left: 0.5em;
+    }
+    .product-rating {
+      color: #e5b400;
+      font-size: 1em;
+      margin-bottom: 0.5em;
+      letter-spacing: 1px;
+    }
+    .product-actions {
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+      gap: 0.5em;
+    }
+    .btn {
+      flex: 1;
+      background: #1150a3;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      padding: 0.5em 0.4em;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.17s;
+    }
+    .btn:hover {
+      background: #0a3671;
+    }
+    .wishlist {
+      background: #f1f3f6;
+      color: #d32f2f;
+      border: none;
+      border-radius: 50%;
+      width: 2.2em;
+      height: 2.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.15em;
+      margin-left: 0.4em;
+      transition: background 0.14s, color 0.14s;
+    }
+    .wishlist:hover {
+      background: #ffeaea;
+      color: #b71c1c;
+    }
+    .pagination {
+      margin: 2em 0 0.5em 0;
+      display: flex;
+      justify-content: center;
+      gap: 0.5em;
+    }
+    .pagination button {
+      background: #fff;
+      border: 1px solid #1150a3;
+      color: #1150a3;
+      border-radius: 5px;
+      padding: 0.25em 1em;
+      font-size: 1em;
+      margin: 0 0.1em;
+      cursor: pointer;
+      transition: background 0.13s, color 0.13s;
+    }
+    .pagination button.active,
+    .pagination button:hover {
+      background: #1150a3;
+      color: #fff;
+    }
+    @media (max-width: 950px) {
+      .main { flex-direction: column; padding: 0 1em; }
+      .sidebar { width: 100%; }
+      .products-section { width: 100%; }
+      .banner { padding: 2em 0.5em; }
+    }
+    @media (max-width: 600px) {
+      .navbar { flex-direction: column; align-items: flex-start; gap: 0.5em; }
+      .main { padding: 0 0.1em; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+      .banner { padding: 1.2em 0.1em; }
+      .sidebar { padding: 1em 0.3em; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a class="logo" href="index.html">A-to-Z</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="electronics.html">Electronics</a>
+      <a href="books.html" class="active">Books</a>
+      <a href="#">Offers</a>
+      <a href="login.html"><i class="fa fa-user"></i> Login</a>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search books, authors, ISBN..." autocomplete="off">
+      <i class="fa fa-search"></i>
+    </div>
+  </nav>
+  <div class="banner">
+    <h1>Buy Books Online in Bangladesh</h1>
+    <p>
+      Discover the largest collection of books, bestsellers, academic and non-academic, children’s books, novels, and more. Fast delivery, exclusive offers, and genuine products only at A-to-Z eBook Shop!
+    </p>
+    <div class="quick-filters">
+      <button onclick="applyQuickFilter('Bestseller')"><i class="fa fa-star"></i> Bestseller</button>
+      <button onclick="applyQuickFilter('Academic')"><i class="fa fa-graduation-cap"></i> Academic</button>
+      <button onclick="applyQuickFilter('Children')"><i class="fa fa-child"></i> Children</button>
+      <button onclick="applyQuickFilter('English')"><i class="fa fa-globe"></i> English Books</button>
+      <button onclick="applyQuickFilter('Bangla')"><i class="fa fa-book"></i> Bangla Books</button>
+      <button onclick="applyQuickFilter('Author')"><i class="fa fa-user"></i> Authors</button>
+      <button onclick="applyQuickFilter('Publisher')"><i class="fa fa-building"></i> Publishers</button>
+    </div>
+  </div>
+  <div class="main">
+    <aside class="sidebar">
+      <div class="filter-block">
+        <h3>Category</h3>
+        <ul>
+          <li><a href="#" onclick="applyCategory('All')">All</a></li>
+          <li><a href="#" onclick="applyCategory('Novel')">Novel</a></li>
+          <li><a href="#" onclick="applyCategory('Academic')">Academic</a></li>
+          <li><a href="#" onclick="applyCategory('Science Fiction')">Science Fiction</a></li>
+          <li><a href="#" onclick="applyCategory('Children')">Children</a></li>
+          <li><a href="#" onclick="applyCategory('Self Help')">Self Help</a></li>
+          <li><a href="#" onclick="applyCategory('Biography')">Biography</a></li>
+          <li><a href="#" onclick="applyCategory('English')">English Books</a></li>
+        </ul>
+      </div>
+      <div class="filter-block">
+        <h3>Price Range</h3>
+        <ul>
+          <li><label><input type="checkbox" onchange="applyPriceFilter(0, 199)"> Under ৳200</label></li>
+          <li><label><input type="checkbox" onchange="applyPriceFilter(200, 499)"> ৳200 - ৳499</label></li>
+          <li><label><input type="checkbox" onchange="applyPriceFilter(500, 999)"> ৳500 - ৳999</label></li>
+          <li><label><input type="checkbox" onchange="applyPriceFilter(1000, 9999)"> Above ৳1000</label></li>
+        </ul>
+      </div>
+      <div class="filter-block">
+        <h3>Publisher</h3>
+        <ul>
+          <li><a href="#" onclick="applyPublisher('All')">All</a></li>
+          <li><a href="#" onclick="applyPublisher('Anupam Prokashoni')">Anupam Prokashoni</a></li>
+          <li><a href="#" onclick="applyPublisher('Onno Prokash')">Onno Prokash</a></li>
+          <li><a href="#" onclick="applyPublisher('Sheba Prokashoni')">Sheba Prokashoni</a></li>
+          <li><a href="#" onclick="applyPublisher('Pearson')">Pearson</a></li>
+        </ul>
+      </div>
+      <div class="filter-block">
+        <h3>Language</h3>
+        <ul>
+          <li><a href="#" onclick="applyLanguage('All')">All</a></li>
+          <li><a href="#" onclick="applyLanguage('Bangla')">Bangla</a></li>
+          <li><a href="#" onclick="applyLanguage('English')">English</a></li>
+        </ul>
+      </div>
+    </aside>
+    <section class="products-section">
+      <div class="products-header">
+        <h2 id="booksHeader">All Books</h2>
+        <select class="sort-select" id="sortSelect">
+          <option value="default">Sort By</option>
+          <option value="low-high">Price: Low to High</option>
+          <option value="high-low">Price: High to Low</option>
+          <option value="az">Title: A-Z</option>
+          <option value="za">Title: Z-A</option>
+          <option value="rating">Rating: High to Low</option>
+        </select>
+      </div>
+      <div class="products-grid" id="productsGrid">
+        <!-- Books will be rendered here by JS -->
+      </div>
+      <div class="pagination" id="pagination"></div>
+    </section>
+  </div>
+  <script>
+    // Sample book data
+    const books = [
+      {
+        title: "জয়িতা (Joyita)",
+        author: "Humayun Ahmed",
+        publisher: "Anupam Prokashoni",
+        price: 250,
+        oldPrice: 300,
+        rating: 4.7,
+        language: "Bangla",
+        category: "Novel",
+        image: "https://i.imgur.com/KzG4Xb0.jpg"
+      },
+      {
+        title: "Physics for Scientists and Engineers",
+        author: "Raymond A. Serway",
+        publisher: "Pearson",
+        price: 1250,
+        oldPrice: 1380,
+        rating: 4.8,
+        language: "English",
+        category: "Academic",
+        image: "https://i.imgur.com/8cZV5Ck.jpg"
+      },
+      {
+        title: "The Alchemist",
+        author: "Paulo Coelho",
+        publisher: "Onno Prokash",
+        price: 450,
+        oldPrice: 490,
+        rating: 4.6,
+        language: "English",
+        category: "Novel",
+        image: "https://i.imgur.com/6N1d1qk.jpg"
+      },
+      {
+        title: "ছোটদের বিজ্ঞান (Science for Kids)",
+        author: "Muhammed Zafar Iqbal",
+        publisher: "Sheba Prokashoni",
+        price: 150,
+        oldPrice: 180,
+        rating: 4.5,
+        language: "Bangla",
+        category: "Children",
+        image: "https://i.imgur.com/kyJyxwm.jpg"
+      },
+      {
+        title: "Atomic Habits",
+        author: "James Clear",
+        publisher: "Onno Prokash",
+        price: 600,
+        oldPrice: 700,
+        rating: 4.9,
+        language: "English",
+        category: "Self Help",
+        image: "https://i.imgur.com/XXOPKzF.jpg"
+      },
+      {
+        title: "A Brief History of Time",
+        author: "Stephen Hawking",
+        publisher: "Pearson",
+        price: 999,
+        oldPrice: 1200,
+        rating: 4.8,
+        language: "English",
+        category: "Science Fiction",
+        image: "https://i.imgur.com/gxJYk3e.jpg"
+      },
+      {
+        title: "অপরাজিতা (Aporajita)",
+        author: "Shariful Hasan",
+        publisher: "Anupam Prokashoni",
+        price: 350,
+        oldPrice: 390,
+        rating: 4.2,
+        language: "Bangla",
+        category: "Biography",
+        image: "https://i.imgur.com/yET2Qk5.jpg"
+      },
+      {
+        title: "Harry Potter and the Philosopher's Stone",
+        author: "J.K. Rowling",
+        publisher: "Sheba Prokashoni",
+        price: 700,
+        oldPrice: 850,
+        rating: 4.9,
+        language: "English",
+        category: "Novel",
+        image: "https://i.imgur.com/DG2I8B1.jpg"
+      },
+      {
+        title: "Effective Communication",
+        author: "Dale Carnegie",
+        publisher: "Onno Prokash",
+        price: 270,
+        oldPrice: 350,
+        rating: 4.0,
+        language: "English",
+        category: "Self Help",
+        image: "https://i.imgur.com/3G0O9xD.jpg"
+      },
+      {
+        title: "গল্পের বই (Story Book)",
+        author: "Anisul Hoque",
+        publisher: "Sheba Prokashoni",
+        price: 180,
+        oldPrice: 220,
+        rating: 4.3,
+        language: "Bangla",
+        category: "Children",
+        image: "https://i.imgur.com/N7gVb9R.jpg"
+      }
+    ];
+
+    // Filter and pagination state
+    let filteredBooks = [...books];
+    let currentPage = 1;
+    const booksPerPage = 6;
+    let activeCategory = 'All';
+    let activePublisher = 'All';
+    let activeLanguage = 'All';
+    let activePriceRange = [];
+    let quickFilter = '';
+
+    // Render books with pagination
+    function renderBooks(list) {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+      // Pagination
+      const totalBooks = list.length;
+      const totalPages = Math.ceil(totalBooks / booksPerPage);
+      if (currentPage > totalPages) currentPage = 1;
+      const start = (currentPage - 1) * booksPerPage;
+      const end = start + booksPerPage;
+      const booksToShow = list.slice(start, end);
+
+      if (booksToShow.length === 0) {
+        grid.innerHTML = '<div style="padding:2em;text-align:center;color:#a33;font-size:1.2em;">No books found.</div>';
+        return;
+      }
+      booksToShow.forEach(book => {
+        grid.innerHTML += `
+          <div class="product-card">
+            <img class="product-image" src="${book.image}" alt="${book.title}">
+            <div class="product-title">${book.title}</div>
+            <div class="product-author">by ${book.author}</div>
+            <div class="product-publisher">${book.publisher}</div>
+            <div class="product-price">৳${book.price}
+              <span class="product-old-price">${book.oldPrice ? '৳'+book.oldPrice : ''}</span>
+            </div>
+            <div class="product-rating">
+              ${renderStars(book.rating)} <span style="color:#333;font-size:0.95em;margin-left:0.5em;">${book.rating}</span>
+            </div>
+            <div class="product-actions">
+              <button class="btn">Add to Cart</button>
+              <button class="wishlist" title="Add to Wishlist"><i class="fa fa-heart"></i></button>
+            </div>
+          </div>
+        `;
+      });
+      renderPagination(totalPages);
+    }
+
+    function renderStars(rating) {
+      let stars = '';
+      for (let i = 1; i <= 5; i++) {
+        if (rating >= i) stars += '<i class="fa fa-star"></i>';
+        else if (rating >= i-0.5) stars += '<i class="fa fa-star-half-alt"></i>';
+        else stars += '<i class="fa fa-star-o"></i>';
+      }
+      return stars;
+    }
+
+    function renderPagination(totalPages) {
+      const pagDiv = document.getElementById('pagination');
+      pagDiv.innerHTML = '';
+      if (totalPages <= 1) return;
+      for (let i = 1; i <= totalPages; i++) {
+        pagDiv.innerHTML += `<button class="${i===currentPage?'active':''}" onclick="goToPage(${i})">${i}</button>`;
+      }
+    }
+
+    function goToPage(page) {
+      currentPage = page;
+      renderBooks(filteredBooks);
+    }
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function() {
+      quickFilter = '';
+      filterBooks();
+    });
+
+    function applyCategory(category) {
+      activeCategory = category;
+      currentPage = 1;
+      filterBooks();
+    }
+    function applyPublisher(pub) {
+      activePublisher = pub;
+      currentPage = 1;
+      filterBooks();
+    }
+    function applyLanguage(lan) {
+      activeLanguage = lan;
+      currentPage = 1;
+      filterBooks();
+    }
+    function applyPriceFilter(min, max) {
+      // Toggle price range
+      let idx = activePriceRange.findIndex(r => r[0] === min && r[1] === max);
+      if (idx > -1) activePriceRange.splice(idx, 1); else activePriceRange.push([min, max]);
+      filterBooks();
+    }
+    function applyQuickFilter(type) {
+      quickFilter = type;
+      currentPage = 1;
+      filterBooks();
+    }
+
+    function filterBooks() {
+      let q = document.getElementById('searchInput').value.trim().toLowerCase();
+      let list = books.filter(book => {
+        let ok = true;
+        if (q) {
+          ok = (
+            book.title.toLowerCase().includes(q) ||
+            book.author.toLowerCase().includes(q) ||
+            book.publisher.toLowerCase().includes(q)
+          );
+        }
+        if (ok && activeCategory !== 'All') ok = book.category === activeCategory;
+        if (ok && activePublisher !== 'All') ok = book.publisher === activePublisher;
+        if (ok && activeLanguage !== 'All') ok = book.language === activeLanguage;
+        if (ok && activePriceRange.length) {
+          ok = false;
+          for (let pr of activePriceRange)
+            if (book.price >= pr[0] && book.price <= pr[1]) ok = true;
+        }
+        if (ok && quickFilter) {
+          if (quickFilter === 'Bestseller') ok = book.rating >= 4.7;
+          else if (quickFilter === 'Academic') ok = book.category === 'Academic';
+          else if (quickFilter === 'Children') ok = book.category === 'Children';
+          else if (quickFilter === 'English') ok = book.language === 'English';
+          else if (quickFilter === 'Bangla') ok = book.language === 'Bangla';
+        }
+        return ok;
+      });
+      filteredBooks = list;
+      document.getElementById('booksHeader').textContent = (quickFilter?quickFilter+' ':'') +
+        (activeCategory!=='All'?activeCategory+' ':'') +
+        (activePublisher!=='All'?activePublisher+' ':'') +
+        (activeLanguage!=='All'?activeLanguage+' ':'') +
+        (q?('"'+q+'"'):'') + 'Books';
+      renderBooks(filteredBooks);
+    }
+
+    // Sorting
+    document.getElementById('sortSelect').addEventListener('change', function() {
+      let sorted = [...filteredBooks];
+      if(this.value === 'low-high') sorted.sort((a,b)=>a.price-b.price);
+      else if(this.value === 'high-low') sorted.sort((a,b)=>b.price-a.price);
+      else if(this.value === 'az') sorted.sort((a,b)=>a.title.localeCompare(b.title));
+      else if(this.value === 'za') sorted.sort((a,b)=>b.title.localeCompare(a.title));
+      else if(this.value === 'rating') sorted.sort((a,b)=>b.rating-a.rating);
+      filteredBooks = sorted;
+      currentPage = 1;
+      renderBooks(filteredBooks);
+    });
+
+    // Initial render
+    renderBooks(books);
+
+    // Expose to global for sidebar and pagination
+    window.goToPage = goToPage;
+    window.applyCategory = applyCategory;
+    window.applyPublisher = applyPublisher;
+    window.applyLanguage = applyLanguage;
+    window.applyPriceFilter = applyPriceFilter;
+    window.applyQuickFilter = applyQuickFilter;
+  </script>
+</body>
+</html>
