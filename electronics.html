@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Electronics | A-to-Z eBook Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background: #f8f9fa;
+      color: #222;
+    }
+    .navbar {
+      background: #fff;
+      padding: 0.7em 2em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar .logo {
+      color: #1150a3;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+    .navbar .nav-links {
+      display: flex;
+      gap: 1.5em;
+    }
+    .navbar a {
+      color: #222;
+      text-decoration: none;
+      font-size: 1.07rem;
+      transition: color 0.18s;
+    }
+    .navbar a:hover {
+      color: #1150a3;
+    }
+    .navbar .search-bar {
+      display: flex;
+      align-items: center;
+      background: #f1f3f6;
+      border-radius: 6px;
+      padding: 0.35em 0.85em;
+      margin-left: 2em;
+    }
+    .navbar .search-bar input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 1em;
+      width: 180px;
+      margin-right: 0.5em;
+    }
+    .navbar .search-bar i {
+      color: #aaa;
+      font-size: 1.1em;
+    }
+    .main {
+      max-width: 1260px;
+      margin: 2em auto;
+      display: flex;
+      gap: 2em;
+    }
+    .sidebar {
+      flex: 0 0 220px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1.5px 5px rgba(0,0,0,0.04);
+      padding: 1.2em 1em;
+      min-height: 400px;
+    }
+    .sidebar h3 {
+      font-size: 1.15em;
+      color: #1150a3;
+      margin-top: 0;
+      margin-bottom: 0.7em;
+      font-weight: 700;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .sidebar li {
+      margin-bottom: 0.7em;
+    }
+    .sidebar li a {
+      color: #555;
+      text-decoration: none;
+      font-size: 1em;
+      transition: color 0.15s;
+    }
+    .sidebar li a:hover {
+      color: #1150a3;
+    }
+    .products-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5em;
+    }
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.7em;
+    }
+    .products-header h2 {
+      font-size: 1.45em;
+      font-weight: 700;
+      margin: 0;
+      color: #222;
+    }
+    .products-header .sort-select {
+      font-size: 1em;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 0.3em 0.7em;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.3em;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1.5px 6px rgba(0,0,0,0.06);
+      padding: 1.1em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.18s;
+      position: relative;
+    }
+    .product-card:hover {
+      box-shadow: 0 4px 16px rgba(17,80,163,0.12);
+    }
+    .product-image {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      margin-bottom: 0.7em;
+      border-radius: 7px;
+      background: #f9fafb;
+      border: 1px solid #eee;
+    }
+    .product-title {
+      font-size: 1.07em;
+      font-weight: 600;
+      color: #222;
+      margin: 0.3em 0 0.2em 0;
+      text-align: center;
+      min-height: 2.5em;
+    }
+    .product-brand {
+      font-size: 0.98em;
+      color: #666;
+      margin-bottom: 0.4em;
+    }
+    .product-price {
+      color: #d32f2f;
+      font-weight: 700;
+      font-size: 1.15em;
+      margin-bottom: 0.4em;
+    }
+    .product-actions {
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+      gap: 0.5em;
+    }
+    .btn {
+      flex: 1;
+      background: #1150a3;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      padding: 0.5em 0.4em;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.17s;
+    }
+    .btn:hover {
+      background: #0a3671;
+    }
+    .wishlist {
+      background: #f1f3f6;
+      color: #d32f2f;
+      border: none;
+      border-radius: 50%;
+      width: 2.2em;
+      height: 2.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.15em;
+      margin-left: 0.4em;
+    }
+    .wishlist:hover {
+      background: #ffeaea;
+      color: #b71c1c;
+    }
+    @media (max-width: 900px) {
+      .main { flex-direction: column; }
+      .sidebar { flex: none; width: 100%; }
+      .products-section { width: 100%; }
+    }
+    @media (max-width: 600px) {
+      .navbar { flex-direction: column; align-items: flex-start; gap: 0.5em; }
+      .main { padding: 0 0.7em; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a class="logo" href="index.html">A-to-Z</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="electronics.html" style="color:#1150a3;font-weight:700;">Electronics</a>
+      <a href="#">Books</a>
+      <a href="#">Offers</a>
+      <a href="login.html"><i class="fa fa-user"></i> Login</a>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search electronics..." autocomplete="off">
+      <i class="fa fa-search"></i>
+    </div>
+  </nav>
+  <div class="main">
+    <aside class="sidebar">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="#">All</a></li>
+        <li><a href="#">Mobile Phones</a></li>
+        <li><a href="#">Laptops</a></li>
+        <li><a href="#">Headphones</a></li>
+        <li><a href="#">Smart Watches</a></li>
+        <li><a href="#">Cameras</a></li>
+        <li><a href="#">Accessories</a></li>
+      </ul>
+      <h3>Brands</h3>
+      <ul>
+        <li><a href="#">Samsung</a></li>
+        <li><a href="#">Apple</a></li>
+        <li><a href="#">Sony</a></li>
+        <li><a href="#">Xiaomi</a></li>
+        <li><a href="#">HP</a></li>
+        <li><a href="#">Dell</a></li>
+      </ul>
+    </aside>
+    <section class="products-section">
+      <div class="products-header">
+        <h2>Electronics</h2>
+        <select class="sort-select" id="sortSelect">
+          <option value="default">Sort By</option>
+          <option value="low-high">Price: Low to High</option>
+          <option value="high-low">Price: High to Low</option>
+          <option value="az">Name: A-Z</option>
+          <option value="za">Name: Z-A</option>
+        </select>
+      </div>
+      <div class="products-grid" id="productsGrid">
+        <!-- Products will be rendered here by JS -->
+      </div>
+    </section>
+  </div>
+  <script>
+    // Dummy product data for demo
+    const products = [
+      {
+        title: "Samsung Galaxy S24",
+        brand: "Samsung",
+        price: 1199,
+        image: "https://images.samsung.com/is/image/samsung/p6pim/levant/galaxy-s24/gallery/levant-galaxy-s24-s921-sm-s921bzadegy-thumb-539287587?$344_344_PNG$"
+      },
+      {
+        title: "Apple iPhone 15 Pro",
+        brand: "Apple",
+        price: 1399,
+        image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-model-unselect-gallery-2-202309?wid=512&hei=512&fmt=jpeg&qlt=95&.v=1692923832002"
+      },
+      {
+        title: "Sony WH-1000XM5 Headphones",
+        brand: "Sony",
+        price: 379,
+        image: "https://m.media-amazon.com/images/I/41M8lXrKcLL._AC_UF894,1000_QL80_.jpg"
+      },
+      {
+        title: "Xiaomi Redmi Note 13",
+        brand: "Xiaomi",
+        price: 299,
+        image: "https://i01.appmifile.com/webfile/globalimg/products/pc/redmi-note-13-pro-5g/overview03.png"
+      },
+      {
+        title: "HP Pavilion x360",
+        brand: "HP",
+        price: 799,
+        image: "https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c06934735.png"
+      },
+      {
+        title: "Dell Inspiron 15",
+        brand: "Dell",
+        price: 699,
+        image: "https://i.dell.com/sites/csimages/App-Merchandizing_Images/all/inspiron-15-3000-laptop-hero-504x350-ng.psd"
+      },
+      {
+        title: "Apple Watch Series 9",
+        brand: "Apple",
+        price: 499,
+        image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ML783_VW_34FR+watch-case-45-alum-silver-nc-9s_VW_34FR_WF_CO_GEO_US?wid=600&hei=600&fmt=jpeg&qlt=95&.v=1694217061221"
+      },
+      {
+        title: "Canon EOS M50 Camera",
+        brand: "Canon",
+        price: 619,
+        image: "https://m.media-amazon.com/images/I/61O9i4NoycL._AC_UF894,1000_QL80_.jpg"
+      },
+      {
+        title: "Boat Airdopes 441",
+        brand: "Boat",
+        price: 49,
+        image: "https://m.media-amazon.com/images/I/51HBom8xz7L._AC_UF894,1000_QL80_.jpg"
+      },
+      {
+        title: "Sony Alpha a6000 Mirrorless",
+        brand: "Sony",
+        price: 549,
+        image: "https://m.media-amazon.com/images/I/81NnEl5Qw9L._AC_UF894,1000_QL80_.jpg"
+      }
+    ];
+
+    // Render products
+    function renderProducts(list) {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+      if(list.length === 0) {
+        grid.innerHTML = '<div>No products found.</div>';
+        return;
+      }
+      list.forEach(product => {
+        grid.innerHTML += `
+          <div class="product-card">
+            <img class="product-image" src="${product.image}" alt="${product.title}">
+            <div class="product-title">${product.title}</div>
+            <div class="product-brand">${product.brand}</div>
+            <div class="product-price">৳${product.price}</div>
+            <div class="product-actions">
+              <button class="btn">Add to Cart</button>
+              <button class="wishlist" title="Add to Wishlist"><i class="fa fa-heart"></i></button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // Initial render
+    renderProducts(products);
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const q = this.value.trim().toLowerCase();
+      if (!q) renderProducts(products);
+      else {
+        renderProducts(products.filter(p =>
+          p.title.toLowerCase().includes(q) ||
+          p.brand.toLowerCase().includes(q)
+        ));
+      }
+    });
+
+    // Sorting functionality
+    document.getElementById('sortSelect').addEventListener('change', function() {
+      let sorted = [...products];
+      if(this.value === 'low-high') sorted.sort((a,b)=>a.price-b.price);
+      else if(this.value === 'high-low') sorted.sort((a,b)=>b.price-a.price);
+      else if(this.value === 'az') sorted.sort((a,b)=>a.title.localeCompare(b.title));
+      else if(this.value === 'za') sorted.sort((a,b)=>b.title.localeCompare(a.title));
+      renderProducts(sorted);
+    });
+  </script>
+</body>
+</html>
