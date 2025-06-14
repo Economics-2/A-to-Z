@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Singer Rice Cooker 2.8L (Double Pot) | A-to-Z eBook Shop</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background: #f8f9fa;
+      color: #222;
+    }
+    .navbar {
+      background: #fff;
+      padding: 0.7em 2em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar .logo {
+      color: #1150a3;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+    .navbar .nav-links {
+      display: flex;
+      gap: 1.5em;
+    }
+    .navbar a {
+      color: #222;
+      text-decoration: none;
+      font-size: 1.07rem;
+      transition: color 0.18s;
+    }
+    .navbar a:hover {
+      color: #1150a3;
+    }
+    .navbar .search-bar {
+      display: flex;
+      align-items: center;
+      background: #f1f3f6;
+      border-radius: 6px;
+      padding: 0.35em 0.85em;
+      margin-left: 2em;
+    }
+    .navbar .search-bar input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 1em;
+      width: 180px;
+      margin-right: 0.5em;
+    }
+    .navbar .search-bar i {
+      color: #aaa;
+      font-size: 1.1em;
+    }
+    .product-main {
+      max-width: 1160px;
+      margin: 2em auto;
+      display: flex;
+      gap: 2em;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 14px rgba(17,80,163,0.06), 0 1.5px 8px rgba(0,0,0,0.03);
+      padding: 2em;
+    }
+    .product-gallery {
+      flex: 0 0 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .product-image-main {
+      width: 300px;
+      height: 300px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: #f9fafb;
+      border: 1px solid #eee;
+      margin-bottom: 1em;
+      box-shadow: 0 1px 10px rgba(0,0,0,0.07);
+    }
+    .product-thumbs {
+      display: flex;
+      gap: 0.7em;
+      margin-bottom: 1.2em;
+    }
+    .product-thumb {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      border-radius: 7px;
+      background: #f9fafb;
+      border: 2px solid #eee;
+      cursor: pointer;
+      transition: border 0.15s;
+    }
+    .product-thumb.active,
+    .product-thumb:hover {
+      border: 2px solid #1150a3;
+    }
+    .product-summary {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+    .product-title {
+      font-size: 2em;
+      font-weight: 700;
+      color: #1150a3;
+      margin-bottom: 0.2em;
+    }
+    .product-brand {
+      font-size: 1.1em;
+      color: #666;
+      margin-bottom: 0.5em;
+    }
+    .product-rating {
+      color: #e5b400;
+      font-size: 1.2em;
+      margin-bottom: 0.5em;
+    }
+    .product-price-block {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+      margin-bottom: 1em;
+    }
+    .product-price {
+      color: #d32f2f;
+      font-weight: 700;
+      font-size: 1.65em;
+    }
+    .product-old-price {
+      color: #888;
+      text-decoration: line-through;
+      font-size: 1.15em;
+    }
+    .product-stock {
+      font-weight: 600;
+      color: #388e3c;
+      font-size: 1.1em;
+    }
+    .product-actions {
+      display: flex;
+      gap: 1em;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+    .btn {
+      background: #1150a3;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1em;
+      padding: 0.7em 2.1em;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.17s;
+    }
+    .btn:hover {
+      background: #0a3671;
+    }
+    .wishlist-btn {
+      background: #ffeaea;
+      color: #d32f2f;
+      border: none;
+      border-radius: 50%;
+      width: 2.8em;
+      height: 2.8em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25em;
+      margin-left: 0.5em;
+      cursor: pointer;
+      transition: background 0.16s, color 0.16s;
+    }
+    .wishlist-btn:hover {
+      background: #d32f2f;
+      color: #fff;
+    }
+    .product-shipping {
+      font-size: 1em;
+      color: #444;
+      margin-bottom: 1em;
+    }
+    .product-meta-table {
+      width: 100%;
+      max-width: 480px;
+      border-collapse: collapse;
+      background: #fafbfc;
+      margin-bottom: 1.7em;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    }
+    .product-meta-table th,
+    .product-meta-table td {
+      border-bottom: 1px solid #f3f4f7;
+      padding: 0.55em 1.1em;
+      text-align: left;
+      font-size: 1em;
+    }
+    .product-meta-table th {
+      background: #f6f8fa;
+      color: #1150a3;
+      font-weight: 700;
+      width: 140px;
+    }
+    .product-meta-table tr:last-child td,
+    .product-meta-table tr:last-child th {
+      border-bottom: none;
+    }
+    .product-desc-section {
+      max-width: 950px;
+      margin: 2.5em auto 1.5em auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+      padding: 2.1em 2em;
+    }
+    .product-desc-section h2 {
+      font-size: 1.35em;
+      color: #1150a3;
+      margin-top: 0;
+      margin-bottom: 0.65em;
+      font-weight: 700;
+    }
+    .product-desc-section ul {
+      margin-top: 0.7em;
+      margin-bottom: 0.7em;
+      padding-left: 1.6em;
+      color: #444;
+    }
+    .review-section {
+      max-width: 950px;
+      margin: 2em auto 2.5em auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+      padding: 2.1em 2em;
+    }
+    .review-section h2 {
+      font-size: 1.22em;
+      color: #1150a3;
+      margin-top: 0;
+      margin-bottom: 1.1em;
+      font-weight: 700;
+    }
+    .review-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .review-list li {
+      margin-bottom: 1.2em;
+      border-bottom: 1px solid #f2f2f2;
+      padding-bottom: 1.1em;
+    }
+    .review-list li:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .review-user {
+      font-weight: 700;
+      color: #1150a3;
+      margin-right: 0.6em;
+      font-size: 1em;
+    }
+    .review-rating {
+      color: #e5b400;
+      margin-right: 0.5em;
+      font-size: 1.1em;
+    }
+    .review-date {
+      font-size: 0.98em;
+      color: #888;
+      margin-left: 0.7em;
+    }
+    .review-text {
+      margin-top: 0.25em;
+      color: #222;
+      font-size: 1.06em;
+    }
+    @media (max-width: 1040px) {
+      .product-main { flex-direction: column; align-items: flex-start; gap: 2.2em; }
+      .product-gallery { flex: none; width: 100%; align-items: flex-start;}
+      .product-image-main { width: 220px; height: 220px; }
+    }
+    @media (max-width: 700px) {
+      .navbar { flex-direction: column; align-items: flex-start; gap: 0.5em; }
+      .product-main { padding: 1em 0.5em; }
+      .product-desc-section, .review-section { padding: 1.2em 0.5em; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a class="logo" href="index.html">A-to-Z</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="electronics.html">Electronics</a>
+      <a href="#">Books</a>
+      <a href="#">Offers</a>
+      <a href="login.html"><i class="fa fa-user"></i> Login</a>
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search..." autocomplete="off">
+      <i class="fa fa-search"></i>
+    </div>
+  </nav>
+  <section class="product-main">
+    <div class="product-gallery">
+      <img id="mainImage" class="product-image-main" src="https://www.singerbd.com/image/cache/catalog/Rice%20Cooker/Singer%20Rice%20Cooker%202.8%20L%20SRC28-600x600.jpg" alt="Singer Rice Cooker 2.8L">
+      <div class="product-thumbs">
+        <img class="product-thumb active" src="https://www.singerbd.com/image/cache/catalog/Rice%20Cooker/Singer%20Rice%20Cooker%202.8%20L%20SRC28-600x600.jpg" alt="Main" onclick="setMainImage(this)">
+        <img class="product-thumb" src="https://i.imgur.com/9B7QOaT.jpg" alt="Pot" onclick="setMainImage(this)">
+        <img class="product-thumb" src="https://i.imgur.com/2Fh3I7B.jpg" alt="Inside" onclick="setMainImage(this)">
+      </div>
+      <div style="margin-top:1em;">
+        <span style="color:#666;font-size:1em;">Share:</span>
+        <a href="#" title="Share on Facebook"><i class="fab fa-facebook" style="color:#1150a3;font-size:1.25em;margin-right:0.7em;"></i></a>
+        <a href="#" title="Share on Twitter"><i class="fab fa-twitter" style="color:#1da1f2;font-size:1.25em;margin-right:0.7em;"></i></a>
+        <a href="#" title="Share on WhatsApp"><i class="fab fa-whatsapp" style="color:#25d366;font-size:1.25em;"></i></a>
+      </div>
+    </div>
+    <div class="product-summary">
+      <div class="product-title">Singer Rice Cooker 2.8L (Double Pot)</div>
+      <div class="product-brand">Brand: <a href="brand-singer.html" style="color:#1150a3;">Singer</a></div>
+      <div class="product-rating">
+        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i>
+        <span style="color:#333;font-size:1em;margin-left:0.5em;">4.5</span> | <span style="color:#666;">18 Reviews</span>
+      </div>
+      <div class="product-price-block">
+        <div class="product-price">৳2,990</div>
+        <div class="product-old-price">৳3,500</div>
+        <div class="product-stock">In Stock</div>
+      </div>
+      <div class="product-actions">
+        <button class="btn"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+        <button class="wishlist-btn" title="Add to Wishlist"><i class="fa fa-heart"></i></button>
+      </div>
+      <div class="product-shipping">
+        <i class="fa fa-truck"></i> Delivery in 1-3 days in Dhaka, 2-5 days nationwide.<br>
+        <i class="fa fa-undo"></i> 7 days easy return policy.
+      </div>
+      <table class="product-meta-table">
+        <tr>
+          <th>Product Code</th>
+          <td>SRRC-SRCDB888CHAMP</td>
+        </tr>
+        <tr>
+          <th>Capacity</th>
+          <td>2.8 Liters (Double Pot)</td>
+        </tr>
+        <tr>
+          <th>Power</th>
+          <td>1000W</td>
+        </tr>
+        <tr>
+          <th>Color</th>
+          <td>Champagne</td>
+        </tr>
+        <tr>
+          <th>Warranty</th>
+          <td>1 Year Service & Parts</td>
+        </tr>
+        <tr>
+          <th>Origin</th>
+          <td>Bangladesh</td>
+        </tr>
+        <tr>
+          <th>Included</th>
+          <td>Rice Cooker, 2 Pots, Spoon, Measuring Cup, Manual</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+  <section class="product-desc-section">
+    <h2>Product Description</h2>
+    <p>
+      The <strong>Singer Rice Cooker 2.8L (Double Pot)</strong> is the perfect kitchen companion for families and gatherings. With its large 2.8L capacity and double pot design, you can cook more rice at once, keep it warm for hours, and even steam vegetables or fish. Its durable non-stick inner pot ensures easy cleaning, while the stylish champagne finish adds elegance to your kitchen.
+    </p>
+    <ul>
+      <li>Large 2.8 Liter capacity – ideal for 6-10 people</li>
+      <li>Double pot system for cooking and warming</li>
+      <li>Automatic keep-warm function</li>
+      <li>Non-stick coated inner pots for easy cleaning</li>
+      <li>Energy efficient 1000W power</li>
+      <li>Durable and safe heat-resistant handles</li>
+      <li>Accessories: Serving spoon & measuring cup included</li>
+      <li>Elegant champagne color</li>
+      <li>1 Year Singer warranty (parts & service)</li>
+    </ul>
+    <p>
+      Whether you're preparing rice, steaming vegetables, or keeping your food warm, the Singer Rice Cooker 2.8L (Double Pot) delivers reliable results every time.
+    </p>
+  </section>
+  <section class="review-section">
+    <h2>Customer Reviews <span style="color:#e5b400;">★★★★☆</span></h2>
+    <ul class="review-list">
+      <li>
+        <span class="review-user">Mahmudul H.</span>
+        <span class="review-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i></span>
+        <span class="review-date">May 2025</span>
+        <div class="review-text">Very good rice cooker for the price. The double pot is really useful and rice doesn't stick. Delivery was fast!</div>
+      </li>
+      <li>
+        <span class="review-user">Fatema Z.</span>
+        <span class="review-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+        <span class="review-date">April 2025</span>
+        <div class="review-text">Happy with the product. Easy to use and clean. Thank you Singer and A-to-Z!</div>
+      </li>
+      <li>
+        <span class="review-user">Shakil R.</span>
+        <span class="review-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+        <span class="review-date">March 2025</span>
+        <div class="review-text">Received in perfect condition. Good build quality, works as described.</div>
+      </li>
+    </ul>
+  </section>
+  <script>
+    // Thumbnail image switching
+    function setMainImage(thumb) {
+      document.getElementById('mainImage').src = thumb.src;
+      document.querySelectorAll('.product-thumb').forEach(function(img){
+        img.classList.remove('active');
+      });
+      thumb.classList.add('active');
+    }
+  </script>
+</body>
+</html>

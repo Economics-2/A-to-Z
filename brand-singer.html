@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Singer Brand | A-to-Z eBook Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background: #f8f9fa;
+      color: #222;
+    }
+    .navbar {
+      background: #fff;
+      padding: 0.7em 2em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar .logo {
+      color: #1150a3;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+    .navbar .nav-links {
+      display: flex;
+      gap: 1.5em;
+    }
+    .navbar a {
+      color: #222;
+      text-decoration: none;
+      font-size: 1.07rem;
+      transition: color 0.18s;
+    }
+    .navbar a:hover {
+      color: #1150a3;
+    }
+    .navbar .search-bar {
+      display: flex;
+      align-items: center;
+      background: #f1f3f6;
+      border-radius: 6px;
+      padding: 0.35em 0.85em;
+      margin-left: 2em;
+    }
+    .navbar .search-bar input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 1em;
+      width: 180px;
+      margin-right: 0.5em;
+    }
+    .navbar .search-bar i {
+      color: #aaa;
+      font-size: 1.1em;
+    }
+    .brand-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5em;
+      max-width: 1100px;
+      margin: 2em auto 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 2em 2em 1.5em 2em;
+      box-shadow: 0 2px 14px rgba(17,80,163,0.06), 0 1.5px 8px rgba(0,0,0,0.03);
+    }
+    .brand-logo {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      background: #f9fafb;
+      border-radius: 10px;
+      border: 1px solid #eee;
+      margin-right: 1em;
+      flex-shrink: 0;
+    }
+    .brand-details {
+      flex: 1;
+    }
+    .brand-title {
+      font-size: 2em;
+      font-weight: 700;
+      color: #1150a3;
+      margin: 0 0 0.5em 0;
+    }
+    .brand-desc {
+      font-size: 1.15em;
+      color: #444;
+      margin-bottom: 0.7em;
+    }
+    .brand-meta {
+      font-size: 1em;
+      color: #666;
+      margin-bottom: 0.3em;
+    }
+    .brand-link {
+      display: inline-block;
+      margin-top: 0.6em;
+      color: #fff;
+      background: #1150a3;
+      padding: 0.55em 1.2em;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.15s;
+    }
+    .brand-link:hover {
+      background: #0a3671;
+    }
+    .main-content {
+      max-width: 1260px;
+      margin: 1.5em auto;
+      display: flex;
+      gap: 2em;
+    }
+    .sidebar {
+      flex: 0 0 220px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1.5px 5px rgba(0,0,0,0.04);
+      padding: 1.2em 1em;
+      min-height: 400px;
+    }
+    .sidebar h3 {
+      font-size: 1.15em;
+      color: #1150a3;
+      margin-top: 0;
+      margin-bottom: 0.7em;
+      font-weight: 700;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .sidebar li {
+      margin-bottom: 0.7em;
+    }
+    .sidebar li a {
+      color: #555;
+      text-decoration: none;
+      font-size: 1em;
+      transition: color 0.15s;
+    }
+    .sidebar li a:hover {
+      color: #1150a3;
+    }
+    .sidebar .filter-block {
+      margin-bottom: 1.5em;
+    }
+    .products-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5em;
+    }
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.7em;
+      flex-wrap: wrap;
+    }
+    .products-header h2 {
+      font-size: 1.3em;
+      font-weight: 700;
+      margin: 0;
+      color: #222;
+    }
+    .products-header .sort-select {
+      font-size: 1em;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 0.3em 0.7em;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.3em;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1.5px 6px rgba(0,0,0,0.06);
+      padding: 1.1em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.18s;
+      position: relative;
+    }
+    .product-card:hover {
+      box-shadow: 0 4px 16px rgba(17,80,163,0.12);
+    }
+    .product-image {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      margin-bottom: 0.7em;
+      border-radius: 7px;
+      background: #f9fafb;
+      border: 1px solid #eee;
+    }
+    .product-title {
+      font-size: 1.07em;
+      font-weight: 600;
+      color: #222;
+      margin: 0.3em 0 0.2em 0;
+      text-align: center;
+      min-height: 2.5em;
+    }
+    .product-price {
+      color: #d32f2f;
+      font-weight: 700;
+      font-size: 1.15em;
+      margin-bottom: 0.4em;
+    }
+    .product-actions {
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+      gap: 0.5em;
+    }
+    .btn {
+      flex: 1;
+      background: #1150a3;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      padding: 0.5em 0.4em;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.17s;
+    }
+    .btn:hover {
+      background: #0a3671;
+    }
+    .wishlist {
+      background: #f1f3f6;
+      color: #d32f2f;
+      border: none;
+      border-radius: 50%;
+      width: 2.2em;
+      height: 2.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.15em;
+      margin-left: 0.4em;
+    }
+    .wishlist:hover {
+      background: #ffeaea;
+      color: #b71c1c;
+    }
+    .brand-info-table {
+      width: 100%;
+      max-width: 650px;
+      border-collapse: collapse;
+      background: #fff;
+      margin-top: 2em;
+      margin-bottom: 2em;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    }
+    .brand-info-table th,
+    .brand-info-table td {
+      border-bottom: 1px solid #f3f4f7;
+      padding: 0.6em 1.1em;
+      text-align: left;
+      font-size: 1em;
+    }
+    .brand-info-table th {
+      background: #f6f8fa;
+      color: #1150a3;
+      font-weight: 700;
+      width: 180px;
+    }
+    .brand-info-table tr:last-child td, .brand-info-table tr:last-child th {
+      border-bottom: none;
+    }
+    @media (max-width: 900px) {
+      .main-content { flex-direction: column; }
+      .sidebar { flex: none; width: 100%; }
+      .products-section { width: 100%; }
+      .brand-header { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .navbar { flex-direction: column; align-items: flex-start; gap: 0.5em; }
+      .main-content { padding: 0 0.7em; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+      .brand-header { padding: 1em 0.6em; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a class="logo" href="index.html">A-to-Z</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="electronics.html">Electronics</a>
+      <a href="#">Books</a>
+      <a href="#">Offers</a>
+      <a href="login.html"><i class="fa fa-user"></i> Login</a>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search Singer products..." autocomplete="off">
+      <i class="fa fa-search"></i>
+    </div>
+  </nav>
+  <section class="brand-header">
+    <img class="brand-logo" src="https://www.singerbd.com/images/logo.png" alt="Singer Logo">
+    <div class="brand-details">
+      <div class="brand-title">Singer</div>
+      <div class="brand-desc">
+        Singer is a renowned global brand known for its wide range of home appliances and electronics. In Bangladesh, Singer is trusted for delivering quality products such as refrigerators, televisions, washing machines, rice cookers, irons, and more, focusing on innovation, durability, and excellent after-sales service. Discover Singer's best-selling electronics at A-to-Z eBook Shop.
+      </div>
+      <div class="brand-meta">
+        <span><strong>Official Brand:</strong> Yes</span><br>
+        <span><strong>Available Products:</strong> 8</span>
+      </div>
+      <a class="brand-link" href="https://www.singerbd.com/" target="_blank" rel="noopener">Visit Official Website <i class="fa fa-external-link-alt"></i></a>
+    </div>
+  </section>
+  <table class="brand-info-table">
+    <tr>
+      <th>Brand Name</th>
+      <td>Singer</td>
+    </tr>
+    <tr>
+      <th>Origin</th>
+      <td>USA / Bangladesh</td>
+    </tr>
+    <tr>
+      <th>Customer Service</th>
+      <td>Available (9am-8pm): 09606600600</td>
+    </tr>
+    <tr>
+      <th>Warranty</th>
+      <td>12-60 Months (Varies by Product)</td>
+    </tr>
+    <tr>
+      <th>Service Centers</th>
+      <td>Nationwide in Bangladesh</td>
+    </tr>
+    <tr>
+      <th>Popular Categories</th>
+      <td>Refrigerators, Washing Machines, TVs, Rice Cookers, Irons, Microwave Ovens, Blenders</td>
+    </tr>
+    <tr>
+      <th>Official Website</th>
+      <td><a href="https://www.singerbd.com/" target="_blank" rel="noopener">https://www.singerbd.com/</a></td>
+    </tr>
+  </table>
+  <div class="main-content">
+    <aside class="sidebar">
+      <div class="filter-block">
+        <h3>Category</h3>
+        <ul>
+          <li><a href="#">All</a></li>
+          <li><a href="#">Refrigerator</a></li>
+          <li><a href="#">Washing Machine</a></li>
+          <li><a href="#">LED TV</a></li>
+          <li><a href="#">Rice Cooker</a></li>
+          <li><a href="#">Iron</a></li>
+          <li><a href="#">Blender</a></li>
+        </ul>
+      </div>
+      <div class="filter-block">
+        <h3>Price Range</h3>
+        <ul>
+          <li><a href="#">Under ৳5,000</a></li>
+          <li><a href="#">৳5,000 - ৳20,000</a></li>
+          <li><a href="#">৳20,000 - ৳50,000</a></li>
+          <li><a href="#">Above ৳50,000</a></li>
+        </ul>
+      </div>
+      <div class="filter-block">
+        <h3>Warranty</h3>
+        <ul>
+          <li><a href="#">12 Months</a></li>
+          <li><a href="#">24 Months</a></li>
+          <li><a href="#">36 Months</a></li>
+          <li><a href="#">60 Months</a></li>
+        </ul>
+      </div>
+    </aside>
+    <section class="products-section">
+      <div class="products-header">
+        <h2>Singer Products</h2>
+        <select class="sort-select" id="sortSelect">
+          <option value="default">Sort By</option>
+          <option value="low-high">Price: Low to High</option>
+          <option value="high-low">Price: High to Low</option>
+          <option value="az">Name: A-Z</option>
+          <option value="za">Name: Z-A</option>
+        </select>
+      </div>
+      <div class="products-grid" id="productsGrid">
+        <!-- Products will be rendered by JS -->
+      </div>
+    </section>
+  </div>
+  <script>
+    // Dummy Singer products data
+    const products = [
+      {
+        title: "Singer Refrigerator 192L",
+        price: 29990,
+        category: "Refrigerator",
+        warranty: "60 Months",
+        image: "https://www.singerbd.com/image/cache/catalog/Refrigerator/Singer%20Direct%20Cool%20Refrigerator%20192%20L%20SRC%20SGD-600x600.jpg"
+      },
+      {
+        title: "Singer LED TV 32 Inch",
+        price: 18490,
+        category: "LED TV",
+        warranty: "24 Months",
+        image: "https://www.singerbd.com/image/cache/catalog/LED-Television/32SLE32E5-600x600.jpg"
+      },
+      {
+        title: "Singer Automatic Washing Machine 7.5kg",
+        price: 26990,
+        category: "Washing Machine",
+        warranty: "36 Months",
+        image: "https://www.singerbd.com/image/cache/catalog/Washing%20Machine/Singer%20Front%20Loading%20Washing%20Machine%207.5%20kg%20SWT75FLD-600x600.jpg"
+      },
+      {
+        title: "Singer Rice Cooker 2.8L",
+        price: 2990,
+        category: "Rice Cooker",
+        warranty: "12 Months",
+        image: "https://www.singerbd.com/image/cache/catalog/Rice%20Cooker/Singer%20Rice%20Cooker%202.8%20L%20SRC28-600x600.jpg"
+      },
+      {
+        title: "Singer Iron Heavy Weight",
+        price: 1690,
+        category: "Iron",
+        warranty: "12 Months",
+        image: "https://www.singerbd.com/image/cache/catalog/Iron/Singer%20Heavy%20Weight%20Iron%20SHWI-600x600.jpg"
+      },
+      {
+        title: "Singer Microwave Oven 23L",
+        price: 12990,
+        category: "Microwave Oven",
+        warranty: "24 Months",
+        image: "https://www.singerbd.com/image/cache/catalog/Microwave%20Oven/Singer%20Microwave%20Oven%2023%20L%20SMO23G-600x600.jpg"
+      },
+      {
+        title: "Singer Blender 3 In 1",
+        price: 3490,
+        category: "Blender",
+        warranty: "12 Months",
+        image: "https://www.singerbd.com/image/cache/catalog/Blender/Singer%203%20In%201%20Blender%20SBL3-600x600.jpg"
+      },
+      {
+        title: "Singer Top Load Washing Machine 8kg",
+        price: 23990,
+        category: "Washing Machine",
+        warranty: "36 Months",
+        image: "https://www.singerbd.com/image/cache/catalog/Washing%20Machine/Singer%20Top%20Loading%20Washing%20Machine%208%20kg%20STL80-600x600.jpg"
+      }
+    ];
+
+    // Render products
+    function renderProducts(list) {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+      if(list.length === 0) {
+        grid.innerHTML = '<div>No products found.</div>';
+        return;
+      }
+      list.forEach(product => {
+        grid.innerHTML += `
+          <div class="product-card">
+            <img class="product-image" src="${product.image}" alt="${product.title}">
+            <div class="product-title">${product.title}</div>
+            <div class="product-price">৳${product.price.toLocaleString()}</div>
+            <div class="product-actions">
+              <button class="btn">Add to Cart</button>
+              <button class="wishlist" title="Add to Wishlist"><i class="fa fa-heart"></i></button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // Initial render
+    renderProducts(products);
+
+    // Search
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const q = this.value.trim().toLowerCase();
+      if (!q) renderProducts(products);
+      else {
+        renderProducts(products.filter(p =>
+          p.title.toLowerCase().includes(q) ||
+          p.category.toLowerCase().includes(q)
+        ));
+      }
+    });
+
+    // Sorting
+    document.getElementById('sortSelect').addEventListener('change', function() {
+      let sorted = [...products];
+      if(this.value === 'low-high') sorted.sort((a,b)=>a.price-b.price);
+      else if(this.value === 'high-low') sorted.sort((a,b)=>b.price-a.price);
+      else if(this.value === 'az') sorted.sort((a,b)=>a.title.localeCompare(b.title));
+      else if(this.value === 'za') sorted.sort((a,b)=>b.title.localeCompare(a.title));
+      renderProducts(sorted);
+    });
+  </script>
+</body>
+</html>
