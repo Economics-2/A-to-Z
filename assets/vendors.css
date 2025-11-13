@@ -1,0 +1,231 @@
+/* vendors.css — Original, functionally-similar vendor helpers and components */
+
+/* 1. Core reset + box-sizing */
+html { box-sizing: border-box; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+*, *::before, *::after { box-sizing: inherit; }
+html, body, div, span, applet, object, iframe,
+h1,h2,h3,h4,h5,h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  font-size: 100%;
+  font-family: inherit;
+}
+
+/* 2. Base typography */
+body {
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  color: #222;
+  background: #fff;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1{font-size:2rem;margin:.5rem 0;}
+h2{font-size:1.75rem;margin:.5rem 0;}
+h3{font-size:1.375rem;margin:.5rem 0;}
+h4{font-size:1.125rem;margin:.5rem 0;}
+h5{font-size:1rem;margin:.5rem 0;}
+h6{font-size:.875rem;margin:.5rem 0;}
+
+/* Paragraphs, lists */
+p { margin: 0 0 1rem 0; }
+ul, ol { margin: 0 0 1rem 1.25rem; }
+li { margin: .25rem 0; }
+
+/* Links */
+a { color: #0066cc; text-decoration: none; background-color: transparent; }
+a:hover, a:focus { text-decoration: underline; outline: none; }
+
+/* Images */
+img { max-width: 100%; height: auto; display: inline-block; }
+
+/* 3. Utilities - spacing, display, text */
+.container { width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+.row { display: flex; flex-wrap: wrap; margin-left: -0.75rem; margin-right: -0.75rem; }
+.col { padding-left: .75rem; padding-right: .75rem; flex: 1 1 0%; min-width: 0; }
+
+/* simple grid columns */
+.col-1 { flex: 0 0 8.333333%; max-width: 8.333333%; }
+.col-2 { flex: 0 0 16.666667%; max-width: 16.666667%; }
+.col-3 { flex: 0 0 25%; max-width: 25%; }
+.col-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
+.col-6 { flex: 0 0 50%; max-width: 50%; }
+.col-12 { flex: 0 0 100%; max-width: 100%; }
+
+/* Responsive helpers */
+@media (max-width: 992px) {
+  .col-md-6 { flex: 0 0 50%; max-width: 50%; }
+  .col-md-12 { flex: 0 0 100%; max-width: 100%; }
+}
+@media (max-width: 768px) {
+  .col-sm-12 { flex: 0 0 100%; max-width: 100%; }
+  .row { margin-left: -0.5rem; margin-right: -0.5rem; }
+  .col { padding-left: .5rem; padding-right: .5rem; }
+}
+
+/* Display */
+.d-block { display: block !important; }
+.d-inline { display: inline !important; }
+.d-inline-block { display: inline-block !important; }
+.d-flex { display: flex !important; }
+.flex-column { flex-direction: column !important; }
+.flex-row { flex-direction: row !important; }
+.justify-center { justify-content: center !important; }
+.items-center { align-items: center !important; }
+
+/* Text */
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+.text-left { text-align: left !important; }
+.text-muted { color: #6c757d !important; }
+.small { font-size: .875rem; }
+
+/* Spacing helpers (prefix: m = margin, p = padding) */
+.m-0 { margin: 0 !important; }
+.mt-1 { margin-top: .25rem !important; } .mt-2 { margin-top: .5rem !important; } .mt-3 { margin-top: 1rem !important; }
+.mb-1 { margin-bottom: .25rem !important; } .mb-2 { margin-bottom: .5rem !important; } .mb-3 { margin-bottom: 1rem !important; }
+.p-1 { padding: .25rem !important; } .p-2 { padding: .5rem !important; } .p-3 { padding: 1rem !important; }
+
+/* 4. Buttons */
+.btn {
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  padding: .5rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .375rem;
+  transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+}
+.btn:hover, .btn:focus { background-color: #0069d9; box-shadow: 0 0 0 .125rem rgba(0,123,255,0.15); outline: none; }
+.btn:active { transform: translateY(1px); }
+
+/* Button variants */
+.btn-secondary { background-color: #6c757d; color: #fff; }
+.btn-success { background-color: #28a745; color: #fff; }
+.btn-danger { background-color: #dc3545; color: #fff; }
+.btn-outline { background: transparent; color: #007bff; border-color: #007bff; }
+
+/* Sizes */
+.btn-sm { padding: .25rem .5rem; font-size: .875rem; border-radius: .25rem; }
+.btn-lg { padding: .75rem 1.25rem; font-size: 1.125rem; border-radius: .5rem; }
+
+/* 5. Forms */
+input, textarea, select, button {
+  font-family: inherit;
+  font-size: 1rem;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  padding: .5rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .375rem;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.form-control:focus { border-color: #80bdff; outline: 0; box-shadow: 0 0 0 .125rem rgba(0,123,255,0.15); }
+.form-group { margin-bottom: 1rem; }
+.form-inline { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+
+/* Select */
+select.form-control { height: calc(2.25rem + 2px); }
+
+/* 6. Tables */
+.table { width: 100%; margin-bottom: 1rem; border-collapse: collapse; }
+.table th, .table td { padding: .75rem; vertical-align: top; border-top: 1px solid #e9ecef; }
+.table thead th { vertical-align: bottom; border-bottom: 2px solid #dee2e6; }
+.table-striped tbody tr:nth-of-type(odd) { background-color: rgba(0,0,0,.02); }
+
+/* Responsive tables */
+.table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 7. Navs, pills */
+.nav { display: flex; flex-wrap: wrap; padding-left: 0; list-style: none; }
+.nav-link { display: block; padding: .5rem 1rem; text-decoration: none; color: #007bff; }
+.nav-link:hover { text-decoration: none; color: #0056b3; }
+
+/* 8. Cards */
+.card { position: relative; display: flex; flex-direction: column; min-width: 0; word-wrap: break-word; background-color: #fff; border: 1px solid rgba(0,0,0,.125); border-radius: .5rem; overflow: hidden; }
+.card-body { padding: 1rem; }
+.card-header { padding: .75rem 1rem; background-color: rgba(0,0,0,.03); border-bottom: 1px solid rgba(0,0,0,.05); }
+
+/* 9. Alerts */
+.alert { position: relative; padding: .75rem 1rem; margin-bottom: 1rem; border: 1px solid transparent; border-radius: .375rem; }
+.alert-info { color: #055160; background-color: #d1ecf1; border-color: #bee5eb; }
+.alert-success { color: #155724; background-color: #d4edda; border-color: #c3e6cb; }
+.alert-warning { color: #856404; background-color: #fff3cd; border-color: #ffeeba; }
+.alert-danger { color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; }
+
+/* 10. Icons fallback helper (for inline svg/icon fonts) */
+.icon { display: inline-block; width: 1em; height: 1em; vertical-align: -.125em; fill: currentColor; }
+
+/* 11. Accessibility helpers */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+/* 12. Small JS-free spinner */
+.spinner {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: .25rem solid rgba(0,0,0,0.1);
+  border-top-color: rgba(0,0,0,0.5);
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 13. Utility: clearfix */
+.clearfix::after { content: ""; display: table; clear: both; }
+
+/* 14. Helpers for shadows and elevation */
+.shadow-sm { box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important; }
+.shadow { box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important; }
+
+/* 15. Responsive breakpoints shorthand */
+@media (min-width: 576px) { .sm-up { display: block; } }
+@media (min-width: 768px) { .md-up { display: block; } }
+@media (min-width: 992px) { .lg-up { display: block; } }
+@media (min-width: 1200px) { .xl-up { display: block; } }
+
+/* 16. Print styles (minimal) */
+@media print {
+  a[href]:after { content: " (" attr(href) ")"; }
+  .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+}
+
+/* End of vendors.css */
