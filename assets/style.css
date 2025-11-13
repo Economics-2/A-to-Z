@@ -1,0 +1,175 @@
+/*================================================================================
+	Item Name: eTDS Custom Design css file
+	Version: 2.0
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+
+/*** Landig page design CSS ***/
+
+#landingpage-hero-section {
+    display: block;
+    padding-top: 25px;
+    padding-bottom: 20px;
+    background: url(../../app-assets/images/pages/vuexy-login-bg.jpg) no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.reg-login-form {
+    display: block;
+    background: -webkit-linear-gradient(332deg, #EFF2F7, #EFF2F7);
+    background: linear-gradient(118deg, #EFF2F7, #EFF2F7);
+    /*box-shadow: 0 0 10px 1px rgb(83, 206, 110);*/
+    border-radius: 4px;
+    padding: 30px;
+    /*color: #fff !important;*/
+}
+
+.reg-login-form h2 {
+    /*color: #626262;*/
+    font-weight: 900;
+    margin-bottom: 20px;
+    line-height: 1.3;
+    font-size: 1.5rem;
+}
+
+.reg-login-form h6 {
+    line-height: 1.5;
+    color: #626262;
+    font-size: 0.95rem;
+}
+
+.reg-login-form p {
+    font-size: 0.9rem;
+}
+
+.reg-login-form .nav.nav-tabs .nav-item .nav-link.active {
+    background-color: #1d8839;
+    color: #fff;
+}
+
+.reg-login-form .nav.nav-tabs .nav-item .nav-link.active:after {
+    display: none;
+}
+
+.reg-login-form .nav.nav-tabs .nav-item .nav-link {
+    color: #1d8839;
+    border: 2px solid #1d8839;
+}
+
+.reg-login-form .nav.nav-tabs li.nav-item:first-child .nav-link {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.reg-login-form .nav.nav-tabs li.nav-item:nth-child(2) .nav-link {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.popup_overlay {
+    z-index: 101;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-35%, -50%);
+    font-size: 1.4em;
+    background-color: white;
+}
+
+.popup_footer {
+    padding: 0.8rem;
+    text-align: center;
+}
+
+.upload_logo {
+    text-align: center;
+}
+
+.no_border {
+    border: none !important;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    opacity: 2s ease-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+
+.header_bottom_border {
+    border-bottom: 1px solid #EDEDED !important;
+    padding-bottom: 10px !important;
+}
+
+.width_auto {
+    width: auto !important;
+}
+
+.vs-pagination--li.is-current .effect {
+    background-color: green !important;
+    border-radius: 50%;
+}
+
+.vs-pagination-primary--buttons:hover .vs-pagination--buttons:hover {
+    background: green !important;
+}
+
+.vs-pagination--ul {
+    margin: auto !important;
+}
+
+.vuesax-app-is-ltr .vs-input--icon-validate.icon-before {
+    left: 100% !important;
+    transform: translateX(-100%) !important;
+}
+
+.vuesax-app-is-ltr .vs-table--search {
+    margin-left: 0 !important;
+}
+
+.header-navbar .navbar-container ul.nav li i.ficon:hover {
+    color: forestgreen !important;
+}
+
+.header-navbar .navbar-container ul.nav li.dropdown-user .dropdown-menu-right .dropdown-item:hover,
+.header-navbar .navbar-container ul.nav li.dropdown-user .dropdown-menu-right .dropdown-item:active {
+    background-color: forestgreen !important;
+}
+
+.dropdown-notification .dropdown-menu-header {
+    background-color: forestgreen !important;
+}
+
+.dropdown-notification .dropdown-menu.dropdown-menu-right::before {
+    background-color: forestgreen !important;
+}
+
+.dropdown .dropdown-menu .dropdown-item:hover {
+    color: forestgreen !important;
+}
+
+.fc .fc-button {
+    background-color: forestgreen !important;
+}
+
+.fc .fc-event {
+    background-color: forestgreen !important;
+}
+
+.fc .fc-view-container .fc-body .fc-day-top.fc-today a {
+    background-color: forestgreen !important;
+}
+
+.modal .modal-header .close span {
+    color: forestgreen !important;
+}
